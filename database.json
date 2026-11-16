@@ -1,0 +1,148 @@
+{
+  "transactions": [
+    {
+      "id": "PXR-E627A0646DF74504",
+      "date": "16/11/2026 às 07:59:10",
+      "amount": 50.51,
+      "amount_formatted": "R$ 50,51",
+      "reason": "Comprei lanche de madrugada por impulso",
+      "tone": "philosophical",
+      "institution": "Banco Central do Desperdício S.A. (Código 999)",
+      "payer": "Você (Mão de Peneira)",
+      "receiver": "Pix Reverso - Fundo de Notificações Inúteis",
+      "key": "pix-reverso@arrependimento.gov.br",
+      "authentication_code": "E7D1652C-3CD8-4284-AFAE-CF2F3EB4C570",
+      "lesson": "Você pagou R$ 50.51. Se você NÃO tivesse feito esse Pix, você teria exatamente R$ 50.51 a mais agora.",
+      "notification_text": "O que restou dos seus R$ 50.51? Apenas a certeza de que a frugalidade era o caminho... que você escolheu não seguir.",
+      "equivalences": [
+        {
+          "icon": "🍗",
+          "label": "Coxinhas de padaria",
+          "value": "~7 unidades"
+        },
+        {
+          "icon": "☕",
+          "label": "Cafezinhos expressos",
+          "value": "~11 xícaras"
+        },
+        {
+          "icon": "🥤",
+          "label": "Combos Pastel + Caldo de Cana",
+          "value": "~3.2 combos"
+        },
+        {
+          "icon": "⏰",
+          "label": "Tempo de CLT trabalhado",
+          "value": "7.3h (438 min)"
+        },
+        {
+          "icon": "🚗",
+          "label": "Fatia de um Celta 2004 Prata",
+          "value": "0.3608%"
+        },
+        {
+          "icon": "📈",
+          "label": "Valor no CDI em 30 anos (10% a.a.)",
+          "value": "R$ 881,37"
+        }
+      ],
+      "compound_future": "R$ 881,37",
+      "hours_worked": 7.3
+    },
+    {
+      "id": "PXR-C4F5F711B7EB4270",
+      "date": "16/11/2026 às 07:49:15",
+      "amount": 42.5,
+      "amount_formatted": "R$ 42,50",
+      "reason": "Comprei cafe expresso superfaturado",
+      "tone": "sarcastic",
+      "institution": "Banco Central do Desperdício S.A. (Código 999)",
+      "payer": "Você (Mão de Peneira)",
+      "receiver": "Pix Reverso - Fundo de Notificações Inúteis",
+      "key": "pix-reverso@arrependimento.gov.br",
+      "authentication_code": "DFF21AF7-48D6-4D9F-AC1E-1E6E2D89C788",
+      "lesson": "Você pagou R$ 42.50. Se você NÃO tivesse feito esse Pix, você teria exatamente R$ 42.50 a mais agora.",
+      "notification_text": "Transação aprovada com sucesso! R$ 42.50 saíram voando da sua conta. Se você não tivesse feito isso, você ainda teria R$ 42.50. Gênio!",
+      "equivalences": [
+        {
+          "icon": "🍗",
+          "label": "Coxinhas de padaria",
+          "value": "~6 unidades"
+        },
+        {
+          "icon": "☕",
+          "label": "Cafezinhos expressos",
+          "value": "~9 xícaras"
+        },
+        {
+          "icon": "🥤",
+          "label": "Combos Pastel + Caldo de Cana",
+          "value": "~2.7 combos"
+        },
+        {
+          "icon": "⏰",
+          "label": "Tempo de CLT trabalhado",
+          "value": "6.2h (372 min)"
+        },
+        {
+          "icon": "🚗",
+          "label": "Fatia de um Celta 2004 Prata",
+          "value": "0.3036%"
+        },
+        {
+          "icon": "📈",
+          "label": "Valor no CDI em 30 anos (10% a.a.)",
+          "value": "R$ 741,60"
+        }
+      ],
+      "compound_future": "R$ 741,60",
+      "hours_worked": 6.2
+    },
+    {
+      "id": "PXR-CLI-1794826000",
+      "date": "16/11/2026 às 07:46:40",
+      "amount": 35.0,
+      "amount_formatted": "R$ 35,00",
+      "reason": "Comprei figurinha do WhatsApp",
+      "tone": "coach",
+      "notification_text": "Dica do Primo Pobre: Se você guardasse esses R$ 35.00 todo dia por 350 anos com juros de 12% a.a., você comprava uma lancha. Mas você preferiu clicar no botão.",
+      "equivalences": [
+        {
+          "icon": "🍗",
+          "label": "Coxinhas de padaria",
+          "value": "~5 unidades"
+        },
+        {
+          "icon": "☕",
+          "label": "Cafezinhos expressos",
+          "value": "~7 xícaras"
+        },
+        {
+          "icon": "🥤",
+          "label": "Combos Pastel + Caldo de Cana",
+          "value": "~2.2 combos"
+        },
+        {
+          "icon": "⏰",
+          "label": "Tempo de CLT trabalhado",
+          "value": "5.1h (306 min)"
+        },
+        {
+          "icon": "🚗",
+          "label": "Fatia de um Celta 2004 Prata",
+          "value": "0.2500%"
+        },
+        {
+          "icon": "📈",
+          "label": "Valor no CDI em 30 anos (10% a.a.)",
+          "value": "R$ 610,73"
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "total_spent": 128.01,
+    "total_could_have_saved": 128.01,
+    "count": 3
+  }
+}

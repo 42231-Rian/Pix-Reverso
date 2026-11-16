@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pix Reverso — Pague para se arrepender</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fundo dinâmico -->
+    <div class="glow-bg"></div>
+
+    <header class="app-header">
+        <div class="container header-content">
+            <div class="brand">
+                <div class="brand-icon">💸</div>
+                <div class="brand-text">
+                    <h1>PIX REVERSO</h1>
+                    <span class="tagline">O Banco do Desperdício Consciente</span>
+                </div>
+            </div>
+
+            <div class="header-badges">
+                <button id="btnSoundToggle" class="btn-icon" title="Ativar/Desativar Som">
+                    <span id="soundIcon">🔊</span>
+                </button>
+                <button id="btnTestNotify" class="btn-secondary btn-sm" title="Testa a notificação do Windows">
+                    🔔 Testar Notificação
+                </button>
+                <div class="badge-account">
+                    <span class="badge-label">Saldo que você perdeu:</span>
+                    <span class="badge-value" id="headerLostBalance">R$ 0,00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <!-- Hero / Filosofia -->
+        <section class="concept-banner">
+            <div class="concept-icon">💡</div>
+            <div class="concept-text">
+                <h3>O Conceito do Pix Reverso</h3>
+                <p>Em um Pix comum, você paga e recebe um produto. No <strong>Pix Reverso</strong>, você paga para receber uma notificação oficial lembrando que, <em>se você não tivesse feito nada, você ainda teria exatamente aquele dinheiro</em>.</p>
+            </div>
+        </section>
+
+        <!-- Grade Principal -->
+        <div class="dashboard-grid">
+            <!-- Coluna 1: Criador de Pix Reverso -->
+            <section class="card payment-card">
+                <div class="card-header">
+                    <h2><span class="icon">💳</span> Fazer um Pix Reverso</h2>
+                    <span class="subtitle">Escolha quanto quer gastar para lamentar</span>
+                </div>
+
+                <form id="pixForm" class="pix-form">
+                    <!-- Valores Rápidos -->
+                    <div class="quick-amounts">
+                        <label class="form-label">Valores Rápidos:</label>
+                        <div class="amount-pills">
+                            <button type="button" class="pill" data-amount="5.00">R$ 5</button>
+                            <button type="button" class="pill" data-amount="15.00">R$ 15</button>
+                            <button type="button" class="pill active" data-amount="30.00">R$ 30</button>
+                            <button type="button" class="pill" data-amount="50.00">R$ 50</button>
+                            <button type="button" class="pill" data-amount="100.00">R$ 100</button>
+                            <button type="button" class="pill" data-amount="200.00">R$ 200</button>
+                        </div>
+                    </div>
+
+                    <!-- Input de Valor -->
+                    <div class="form-group">
+                        <label for="amountInput" class="form-label">Valor do Desperdício (R$):</label>
+                        <div class="input-currency">
+                            <span class="currency-symbol">R$</span>
+                            <input type="number" id="amountInput" step="0.50" min="0.01" value="30.00" required>
+                        </div>
+                    </div>
+
+                    <!-- Motivo -->
+                    <div class="form-group">
+                        <label for="reasonInput" class="form-label">Motivo do Arrependimento:</label>
+                        <input type="text" id="reasonInput" placeholder="Ex: Café gourmet de shopping, comprei skin no jogo..." value="Comprei lanche de madrugada por impulso" required>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Tom da Mensagem -->
+                        <div class="form-group col">
+                            <label for="toneSelect" class="form-label">Tom da Lição de Moral:</label>
+                            <select id="toneSelect">
+                                <option value="sarcastic">😈 Sarcástico (Deboche Máximo)</option>
+                                <option value="coach">📢 Coach Agressivo (Primo Pobre)</option>
+                                <option value="philosophical">🧘 Filosófico (Niilismo Cósmico)</option>
+                                <option value="guilt">🥺 Culpa Familiar (Pense na sua mãe)</option>
+                            </select>
+                        </div>
+
+                        <!-- Delay da Notificação -->
+                        <div class="form-group col">
+                            <label for="delaySelect" class="form-label">Tempo da Notificação:</label>
+                            <select id="delaySelect">
+                                <option value="0">⚡ Imediato (Arrependimento Flash)</option>
+                                <option value="5">⏳ 5s (Tempo de respirar fundo)</option>
+                                <option value="15">⏳ 15s (Falsa sensação de paz)</option>
+                                <option value="30">⏳ 30s (A culpa bate depois)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary btn-block" id="btnPayInstant">
+                            <span class="btn-text">💸 Pagar Pix Reverso Agora</span>
+                            <span class="spinner" id="paySpinner"></span>
+                        </button>
+                        <button type="button" class="btn-outline btn-block" id="btnGenerateQr">
+                            <span>📱 Ver QR Code & Pix Copia e Cola</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Coluna 2: Métricas do Desperdício -->
+            <section class="card stats-card">
+                <div class="card-header">
+                    <h2><span class="icon">📊</span> Painel do Rombo</h2>
+                    <span class="subtitle">Estatísticas em tempo real da sua imprudência</span>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-box danger">
+                        <span class="metric-label">Total Pago no Pix Reverso</span>
+                        <div class="metric-value" id="statTotalSpent">R$ 0,00</div>
+                        <span class="metric-footnote">Dinheiro 100% evaporado</span>
+                    </div>
+
+                    <div class="metric-box alert">
+                        <span class="metric-label">O que você teria se não fizesse nada</span>
+                        <div class="metric-value" id="statCouldSave">R$ 0,00</div>
+                        <span class="metric-footnote">Exatamente o mesmo valor!</span>
+                    </div>
+
+                    <div class="metric-box info">
+                        <span class="metric-label">Coxinhas Jogadas no Lixo</span>
+                        <div class="metric-value" id="statCoxinhas">0</div>
+                        <span class="metric-footnote">Calculado a R$ 7,00 cada</span>
+                    </div>
+
+                    <div class="metric-box neutral">
+                        <span class="metric-label">Horas CLT Queimadas</span>
+                        <div class="metric-value" id="statHoursWorked">0.0h</div>
+                        <span class="metric-footnote">De esforço jogado no ralo</span>
+                    </div>
+                </div>
+
+                <div class="quote-card" id="randomTipCard">
+                    <div class="quote-icon">💭</div>
+                    <p class="quote-text">"Se você economizasse R$ 50 todo dia por 500 anos, teria R$ 9.125.000. Mas você preferiu pagar um Pix Reverso."</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Histórico do Desperdício -->
+        <section class="card history-card">
+            <div class="card-header space-between">
+                <div>
+                    <h2><span class="icon">📜</span> Extrato de Decisões Questionáveis</h2>
+                    <span class="subtitle">Histórico de todas as vezes em que você pagou para ser avisado</span>
+                </div>
+                <button id="btnClearHistory" class="btn-danger-outline btn-sm">
+                    🗑️ Apagar Histórico
+                </button>
+            </div>
+
+            <div class="history-list" id="historyList">
+                <div class="empty-state" id="emptyHistory">
+                    <span class="empty-icon">📭</span>
+                    <p>Nenhum Pix Reverso realizado ainda.</p>
+                    <small>Seu bolso agradece. Mas até quando?</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL: QR Code & Pagamento Simulado -->
+    <div class="modal-backdrop" id="qrModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>📱 Cobrança Pix Reverso</h3>
+                <button class="modal-close" id="btnCloseQr">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="qr-instruction">Aponte a câmera ou use o Pix Copia e Cola para pagar e se arrepender:</p>
+                <div class="qr-wrapper" id="qrContainer"></div>
+                <div class="qr-amount" id="modalQrAmount">R$ 0,00</div>
+                
+                <div class="pix-copia-cola">
+                    <input type="text" id="pixCodeInput" readonly>
+                    <button class="btn-copy" id="btnCopyPix">📋 Copiar</button>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-primary btn-block" id="btnConfirmQrPay">
+                        ✅ Simular Pagamento Concluído
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Comprovante Oficial de Arrependimento -->
+    <div class="modal-backdrop" id="receiptModal">
+        <div class="modal-card receipt-style">
+            <div class="modal-header receipt-header">
+                <div class="receipt-brand">
+                    <span class="receipt-logo">💸</span>
+                    <div>
+                        <h3>COMPROVANTE OFICIAL DE ARREPENDIMENTO</h3>
+                        <span>Banco Central do Desperdício S.A.</span>
+                    </div>
+                </div>
+                <button class="modal-close" id="btnCloseReceipt">&times;</button>
+            </div>
+
+            <div class="modal-body receipt-body" id="receiptContent">
+                <!-- Conteúdo gerado dinamicamente -->
+            </div>
+
+            <div class="modal-footer receipt-footer">
+                <button class="btn-outline" id="btnPrintReceipt">🖨️ Imprimir Comprovante</button>
+                <button class="btn-primary" id="btnNewPix">💸 Fazer Outro Pix</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Banner Flutuante -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="/static/js/qrcode.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

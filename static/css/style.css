@@ -1,0 +1,1073 @@
+/* ==========================================================================
+   PIX REVERSO - STYLESHEET
+   Design inspirado em fintech moderna com toques satíricos
+   ========================================================================== */
+
+:root {
+    --bg-main: #0b0f19;
+    --bg-card: rgba(18, 24, 38, 0.85);
+    --bg-card-hover: rgba(26, 34, 52, 0.95);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(139, 92, 246, 0.3);
+
+    --primary: #8b5cf6;
+    --primary-hover: #7c3aed;
+    --primary-glow: rgba(139, 92, 246, 0.4);
+
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --accent-amber: #f59e0b;
+    --accent-blue: #3b82f6;
+
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --text-dim: #6b7280;
+
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-pill: 9999px;
+
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Fundo com efeito de luz sutil */
+.glow-bg {
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(239, 68, 68, 0.05) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.app-header {
+    background: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 16px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(239, 68, 68, 0.2));
+    border: 1px solid var(--border-glow);
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-glow);
+}
+
+.brand-text h1 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-text .tagline {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.header-badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge-account {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.badge-label {
+    font-size: 0.65rem;
+    color: #fca5a5;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.badge-value {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #f87171;
+}
+
+/* ==========================================================================
+   BANNER DE CONCEITO
+   ========================================================================== */
+
+.main-content {
+    padding: 30px 20px 80px;
+}
+
+.concept-banner {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary);
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-card);
+}
+
+.concept-icon {
+    font-size: 2rem;
+}
+
+.concept-text h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.concept-text p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.concept-text strong {
+    color: #c4b5fd;
+}
+
+/* ==========================================================================
+   GRID PRINCIPAL
+   ========================================================================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(8px);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.card-header {
+    margin-bottom: 20px;
+}
+
+.card-header.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+}
+
+.card-header .subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    display: block;
+}
+
+/* ==========================================================================
+   FORMULÁRIO DE PIX REVERSO
+   ========================================================================== */
+
+.pix-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.quick-amounts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.amount-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pill:hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: var(--primary);
+}
+
+.pill.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.input-currency {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency-symbol {
+    position: absolute;
+    left: 16px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dim);
+}
+
+.input-currency input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px 16px 14px 50px;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: var(--font-sans);
+}
+
+.input-currency input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: var(--font-sans);
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+}
+
+.form-group select option {
+    background: #111827;
+    color: #fff;
+}
+
+.form-row {
+    display: flex;
+    gap: 14px;
+}
+
+.form-row .col {
+    flex: 1;
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+/* ==========================================================================
+   BOTÕES
+   ========================================================================== */
+
+.btn-primary {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 40, 217, 0.6);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-sans);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-sans);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-danger-outline {
+    background: transparent;
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-danger-outline:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: var(--accent-red);
+}
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+}
+
+/* Spinner */
+.spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   MÉTRICAS DO DESPERDÍCIO
+   ========================================================================== */
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.metric-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-box.danger {
+    border-left: 3px solid var(--accent-red);
+}
+
+.metric-box.alert {
+    border-left: 3px solid var(--accent-amber);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.metric-box.info {
+    border-left: 3px solid var(--accent-blue);
+}
+
+.metric-box.neutral {
+    border-left: 3px solid var(--primary);
+}
+
+.metric-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 4px 0;
+}
+
+.metric-box.danger .metric-value {
+    color: #f87171;
+}
+
+.metric-box.alert .metric-value {
+    color: #fbbf24;
+}
+
+.metric-footnote {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+}
+
+.quote-card {
+    background: rgba(139, 92, 246, 0.06);
+    border: 1px dashed rgba(139, 92, 246, 0.3);
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.quote-icon {
+    font-size: 1.5rem;
+}
+
+.quote-text {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: #d8b4fe;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   HISTÓRICO DE PIX REVERSO
+   ========================================================================== */
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 480px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.history-item {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.history-item:hover {
+    background: rgba(0, 0, 0, 0.45);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.history-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-reason {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.history-details {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.history-pill {
+    background: rgba(139, 92, 246, 0.15);
+    color: #c4b5fd;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.history-financials {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.history-amount {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #f87171;
+}
+
+.history-could-have {
+    font-size: 0.72rem;
+    color: #fbbf24;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+}
+
+.empty-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   MODAL
+   ========================================================================== */
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: #111827;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.25s ease;
+}
+
+.modal-backdrop.active .modal-card {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.qr-instruction {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.qr-wrapper {
+    background: #fff;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    display: inline-block;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    margin-bottom: 16px;
+}
+
+.qr-wrapper img, .qr-wrapper canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+.qr-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-red);
+    margin-bottom: 16px;
+}
+
+.pix-copia-cola {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.pix-copia-cola input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-family: monospace;
+}
+
+.btn-copy {
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid var(--primary);
+    color: #c4b5fd;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: background 0.2s;
+}
+
+.btn-copy:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* ==========================================================================
+   COMPROVANTE DE ARREPENDIMENTO (RECEIPT)
+   ========================================================================== */
+
+.modal-card.receipt-style {
+    max-width: 540px;
+    background: #0f172a;
+    border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+.receipt-header {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(239, 68, 68, 0.1));
+}
+
+.receipt-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.receipt-logo {
+    font-size: 1.8rem;
+}
+
+.receipt-brand h3 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.receipt-brand span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.receipt-body {
+    max-height: 65vh;
+    overflow-y: auto;
+    font-size: 0.85rem;
+}
+
+.receipt-amount-box {
+    text-align: center;
+    padding: 16px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+}
+
+.receipt-amount-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: #fca5a5;
+    font-weight: 700;
+}
+
+.receipt-amount-val {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #f87171;
+    margin: 4px 0;
+}
+
+.receipt-amount-sub {
+    font-size: 0.78rem;
+    color: #fcd34d;
+    font-weight: 600;
+}
+
+.receipt-section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 16px 0 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 4px;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.receipt-label {
+    color: var(--text-dim);
+}
+
+.receipt-val {
+    font-weight: 600;
+    color: #fff;
+    text-align: right;
+}
+
+.receipt-alert-box {
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin: 16px 0;
+}
+
+.receipt-alert-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #c4b5fd;
+    margin-bottom: 4px;
+}
+
+.receipt-alert-text {
+    font-size: 0.85rem;
+    color: #e9d5ff;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+.receipt-equivalences {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.eq-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.eq-icon {
+    font-size: 1.2rem;
+}
+
+.eq-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.eq-label {
+    font-size: 0.68rem;
+    color: var(--text-dim);
+}
+
+.eq-val {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.receipt-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   TOAST BANNER FLUTUANTE
+   ========================================================================== */
+
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    background: #1e1b4b;
+    border: 1px solid #818cf8;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    max-width: 380px;
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+}
+
+.toast-content h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #c7d2fe;
+    margin-bottom: 2px;
+}
+
+.toast-content p {
+    font-size: 0.82rem;
+    color: #e0e7ff;
+    line-height: 1.35;
+}
+
+/* ==========================================================================
+   PRINT STYLESHEET
+   ========================================================================== */
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #receiptModal, #receiptModal * {
+        visibility: visible;
+    }
+    #receiptModal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: #fff !important;
+        color: #000 !important;
+        opacity: 1 !important;
+    }
+    .modal-card.receipt-style {
+        max-width: 100% !important;
+        border: 2px solid #000 !important;
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+    }
+    .receipt-header, .receipt-amount-box, .receipt-alert-box, .eq-pill {
+        background: #f3f4f6 !important;
+        color: #000 !important;
+        border-color: #ccc !important;
+    }
+    .receipt-footer, .modal-close {
+        display: none !important;
+    }
+}
