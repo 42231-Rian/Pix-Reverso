@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pix Reverso — O Banco do Desperdício Consciente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: rgba(18, 24, 38, 0.85);
+            --bg-card-hover: rgba(26, 34, 52, 0.95);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(139, 92, 246, 0.3);
+
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-blue: #3b82f6;
+
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+
+            --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-pill: 9999px;
+
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .glow-bg {
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(239, 68, 68, 0.05) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        .app-header {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(239, 68, 68, 0.2));
+            border: 1px solid var(--border-glow);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .brand-text h1 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text .tagline {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .header-badges {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-account {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .badge-label {
+            font-size: 0.65rem;
+            color: #fca5a5;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .badge-value {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #f87171;
+        }
+
+        /* CONCEITO */
+        .main-content {
+            padding: 30px 20px 80px;
+        }
+
+        .concept-banner {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .concept-icon {
+            font-size: 2rem;
+        }
+
+        .concept-text h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .concept-text p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .concept-text strong {
+            color: #c4b5fd;
+        }
+
+        /* GRID PRINCIPAL */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(8px);
+            transition: border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+        }
+
+        .card-header.space-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+        }
+
+        .card-header .subtitle {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+            display: block;
+        }
+
+        /* FORM */
+        .pix-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .quick-amounts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .amount-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pill:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--primary);
+        }
+
+        .pill.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .input-currency {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 16px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dim);
+        }
+
+        .input-currency input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 16px 14px 50px;
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: var(--font-sans);
+        }
+
+        .input-currency input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+
+        .form-group input[type="text"],
+        .form-group select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            color: #fff;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: var(--font-sans);
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+        }
+
+        .form-group select option {
+            background: #111827;
+            color: #fff;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 14px;
+        }
+
+        .form-row .col {
+            flex: 1;
+        }
+
+        .form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        /* BOTÕES */
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: var(--font-sans);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 40, 217, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-sans);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-sans);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-danger-outline {
+            background: transparent;
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-danger-outline:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: var(--accent-red);
+        }
+
+        .btn-icon {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        /* METRICAS */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .metric-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-box.danger {
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .metric-box.alert {
+            border-left: 3px solid var(--accent-amber);
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .metric-box.info {
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .metric-box.neutral {
+            border-left: 3px solid var(--primary);
+        }
+
+        .metric-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 4px 0;
+        }
+
+        .metric-box.danger .metric-value {
+            color: #f87171;
+        }
+
+        .metric-box.alert .metric-value {
+            color: #fbbf24;
+        }
+
+        .metric-footnote {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .quote-card {
+            background: rgba(139, 92, 246, 0.06);
+            border: 1px dashed rgba(139, 92, 246, 0.3);
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .quote-icon {
+            font-size: 1.5rem;
+        }
+
+        .quote-text {
+            font-size: 0.82rem;
+            font-style: italic;
+            color: #d8b4fe;
+            line-height: 1.4;
+        }
+
+        /* HISTORICO */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .history-item {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .history-item:hover {
+            background: rgba(0, 0, 0, 0.45);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .history-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .history-reason {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .history-details {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .history-pill {
+            background: rgba(139, 92, 246, 0.15);
+            color: #c4b5fd;
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .history-financials {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .history-amount {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #f87171;
+        }
+
+        .history-could-have {
+            font-size: 0.72rem;
+            color: #fbbf24;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* MODAIS */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #111827;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: transform 0.25s ease;
+        }
+
+        .modal-backdrop.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .qr-instruction {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .qr-wrapper {
+            background: #fff;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            display: inline-block;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 16px;
+        }
+
+        .qr-wrapper img, .qr-wrapper canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .qr-amount {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-red);
+            margin-bottom: 16px;
+        }
+
+        .pix-copia-cola {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .pix-copia-cola input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            font-family: monospace;
+        }
+
+        .btn-copy {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid var(--primary);
+            color: #c4b5fd;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.82rem;
+            transition: background 0.2s;
+        }
+
+        .btn-copy:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* RECIBO */
+        .modal-card.receipt-style {
+            max-width: 540px;
+            background: #0f172a;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+        }
+
+        .receipt-header {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(239, 68, 68, 0.1));
+        }
+
+        .receipt-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .receipt-logo {
+            font-size: 1.8rem;
+        }
+
+        .receipt-brand h3 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+
+        .receipt-brand span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .receipt-body {
+            max-height: 65vh;
+            overflow-y: auto;
+            font-size: 0.85rem;
+        }
+
+        .receipt-amount-box {
+            text-align: center;
+            padding: 16px;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+        }
+
+        .receipt-amount-title {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: #fca5a5;
+            font-weight: 700;
+        }
+
+        .receipt-amount-val {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #f87171;
+            margin: 4px 0;
+        }
+
+        .receipt-amount-sub {
+            font-size: 0.78rem;
+            color: #fcd34d;
+            font-weight: 600;
+        }
+
+        .receipt-section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 16px 0 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+        }
+
+        .receipt-label {
+            color: var(--text-dim);
+        }
+
+        .receipt-val {
+            font-weight: 600;
+            color: #fff;
+            text-align: right;
+        }
+
+        .receipt-alert-box {
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            margin: 16px 0;
+        }
+
+        .receipt-alert-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #c4b5fd;
+            margin-bottom: 4px;
+        }
+
+        .receipt-alert-text {
+            font-size: 0.85rem;
+            color: #e9d5ff;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .receipt-equivalences {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .eq-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .eq-icon {
+            font-size: 1.2rem;
+        }
+
+        .eq-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .eq-label {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+        }
+
+        .eq-val {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .receipt-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* TOAST FLUTUANTE */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toast {
+            background: #1e1b4b;
+            border: 1px solid #818cf8;
+            color: #fff;
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            max-width: 380px;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+        }
+
+        .toast-content h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #c7d2fe;
+            margin-bottom: 2px;
+        }
+
+        .toast-content p {
+            font-size: 0.82rem;
+            color: #e0e7ff;
+            line-height: 1.35;
+        }
+
+        /* PRINT */
+        @media print {
+            body * { visibility: hidden; }
+            #receiptModal, #receiptModal * { visibility: visible; }
+            #receiptModal {
+                position: absolute; left: 0; top: 0; width: 100%;
+                background: #fff !important; color: #000 !important; opacity: 1 !important;
+            }
+            .modal-card.receipt-style {
+                max-width: 100% !important; border: 2px solid #000 !important;
+                background: #fff !important; color: #000 !important; box-shadow: none !important;
+            }
+            .receipt-header, .receipt-amount-box, .receipt-alert-box, .eq-pill {
+                background: #f3f4f6 !important; color: #000 !important; border-color: #ccc !important;
+            }
+            .receipt-footer, .modal-close { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-bg"></div>
+
+    <header class="app-header">
+        <div class="container header-content">
+            <div class="brand">
+                <div class="brand-icon">💸</div>
+                <div class="brand-text">
+                    <h1>PIX REVERSO</h1>
+                    <span class="tagline">O Banco do Desperdício Consciente</span>
+                </div>
+            </div>
+
+            <div class="header-badges">
+                <button id="btnSoundToggle" class="btn-icon" title="Ativar/Desativar Som">
+                    <span id="soundIcon">🔊</span>
+                </button>
+                <button id="btnBrowserNotify" class="btn-secondary btn-sm" title="Ativar notificações nativas do navegador">
+                    🔔 Ativar Notificações
+                </button>
+                <div class="badge-account">
+                    <span class="badge-label">Saldo que você perdeu:</span>
+                    <span class="badge-value" id="headerLostBalance">R$ 0,00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <section class="concept-banner">
+            <div class="concept-icon">💡</div>
+            <div class="concept-text">
+                <h3>O Conceito do Pix Reverso</h3>
+                <p>Em um Pix comum, você paga e recebe algo. No <strong>Pix Reverso</strong>, você paga para receber uma notificação oficial lembrando que, <em>se você não tivesse feito nada, você ainda teria exatamente aquele dinheiro na sua conta</em>.</p>
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+            <!-- Coluna 1: Criador de Pix Reverso -->
+            <section class="card payment-card">
+                <div class="card-header">
+                    <h2><span class="icon">💳</span> Fazer um Pix Reverso</h2>
+                    <span class="subtitle">Escolha quanto quer gastar para lamentar</span>
+                </div>
+
+                <form id="pixForm" class="pix-form">
+                    <div class="quick-amounts">
+                        <label class="form-label">Valores Rápidos:</label>
+                        <div class="amount-pills">
+                            <button type="button" class="pill" data-amount="5.00">R$ 5</button>
+                            <button type="button" class="pill" data-amount="15.00">R$ 15</button>
+                            <button type="button" class="pill active" data-amount="30.00">R$ 30</button>
+                            <button type="button" class="pill" data-amount="50.00">R$ 50</button>
+                            <button type="button" class="pill" data-amount="100.00">R$ 100</button>
+                            <button type="button" class="pill" data-amount="200.00">R$ 200</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amountInput" class="form-label">Valor do Desperdício (R$):</label>
+                        <div class="input-currency">
+                            <span class="currency-symbol">R$</span>
+                            <input type="number" id="amountInput" step="0.50" min="0.01" value="30.00" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reasonInput" class="form-label">Motivo do Arrependimento:</label>
+                        <input type="text" id="reasonInput" placeholder="Ex: Café gourmet de shopping, comprei skin no jogo..." value="Comprei lanche de madrugada por impulso" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="toneSelect" class="form-label">Tom da Lição de Moral:</label>
+                            <select id="toneSelect">
+                                <option value="sarcastic">😈 Sarcástico (Deboche Máximo)</option>
+                                <option value="coach">📢 Coach Agressivo (Primo Pobre)</option>
+                                <option value="philosophical">🧘 Filosófico (Niilismo Cósmico)</option>
+                                <option value="guilt">🥺 Culpa Familiar (Pense na sua mãe)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col">
+                            <label for="delaySelect" class="form-label">Tempo da Notificação:</label>
+                            <select id="delaySelect">
+                                <option value="0">⚡ Imediato (Arrependimento Flash)</option>
+                                <option value="5">⏳ 5s (Tempo de respirar fundo)</option>
+                                <option value="15">⏳ 15s (Falsa sensação de paz)</option>
+                                <option value="30">⏳ 30s (A culpa bate depois)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary btn-block" id="btnPayInstant">
+                            <span class="btn-text">💸 Pagar Pix Reverso Agora</span>
+                        </button>
+                        <button type="button" class="btn-outline btn-block" id="btnGenerateQr">
+                            <span>📱 Ver QR Code & Pix Copia e Cola</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Coluna 2: Métricas do Desperdício -->
+            <section class="card stats-card">
+                <div class="card-header">
+                    <h2><span class="icon">📊</span> Painel do Rombo</h2>
+                    <span class="subtitle">Estatísticas em tempo real da sua imprudência</span>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-box danger">
+                        <span class="metric-label">Total Pago no Pix Reverso</span>
+                        <div class="metric-value" id="statTotalSpent">R$ 0,00</div>
+                        <span class="metric-footnote">Dinheiro 100% evaporado</span>
+                    </div>
+
+                    <div class="metric-box alert">
+                        <span class="metric-label">O que você teria se não fizesse nada</span>
+                        <div class="metric-value" id="statCouldSave">R$ 0,00</div>
+                        <span class="metric-footnote">Exatamente o mesmo valor!</span>
+                    </div>
+
+                    <div class="metric-box info">
+                        <span class="metric-label">Coxinhas Jogadas no Lixo</span>
+                        <div class="metric-value" id="statCoxinhas">0</div>
+                        <span class="metric-footnote">Calculado a R$ 7,00 cada</span>
+                    </div>
+
+                    <div class="metric-box neutral">
+                        <span class="metric-label">Horas CLT Queimadas</span>
+                        <div class="metric-value" id="statHoursWorked">0.0h</div>
+                        <span class="metric-footnote">De esforço jogado no ralo</span>
+                    </div>
+                </div>
+
+                <div class="quote-card" id="randomTipCard">
+                    <div class="quote-icon">💭</div>
+                    <p class="quote-text">"Se você economizasse R$ 50 todo dia por 500 anos, teria R$ 9.125.000. Mas você preferiu pagar um Pix Reverso."</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="card history-card">
+            <div class="card-header space-between">
+                <div>
+                    <h2><span class="icon">📜</span> Extrato de Decisões Questionáveis</h2>
+                    <span class="subtitle">Histórico de todas as vezes em que você pagou para ser avisado</span>
+                </div>
+                <button id="btnClearHistory" class="btn-danger-outline btn-sm">
+                    🗑️ Apagar Histórico
+                </button>
+            </div>
+
+            <div class="history-list" id="historyList">
+                <div class="empty-state" id="emptyHistory">
+                    <span class="empty-icon">📭</span>
+                    <p>Nenhum Pix Reverso realizado ainda.</p>
+                    <small>Seu bolso agradece. Mas até quando?</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL: QR Code & Pagamento Simulado -->
+    <div class="modal-backdrop" id="qrModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>📱 Cobrança Pix Reverso</h3>
+                <button class="modal-close" id="btnCloseQr">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="qr-instruction">Aponte a câmera ou use o Pix Copia e Cola para pagar e se arrepender:</p>
+                <div class="qr-wrapper" id="qrContainer"></div>
+                <div class="qr-amount" id="modalQrAmount">R$ 0,00</div>
+                
+                <div class="pix-copia-cola">
+                    <input type="text" id="pixCodeInput" readonly>
+                    <button class="btn-copy" id="btnCopyPix">📋 Copiar</button>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-primary btn-block" id="btnConfirmQrPay">
+                        ✅ Simular Pagamento Concluído
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Comprovante Oficial de Arrependimento -->
+    <div class="modal-backdrop" id="receiptModal">
+        <div class="modal-card receipt-style">
+            <div class="modal-header receipt-header">
+                <div class="receipt-brand">
+                    <span class="receipt-logo">💸</span>
+                    <div>
+                        <h3>COMPROVANTE OFICIAL DE ARREPENDIMENTO</h3>
+                        <span>Banco Central do Desperdício S.A.</span>
+                    </div>
+                </div>
+                <button class="modal-close" id="btnCloseReceipt">&times;</button>
+            </div>
+
+            <div class="modal-body receipt-body" id="receiptContent">
+                <!-- Dinâmico -->
+            </div>
+
+            <div class="modal-footer receipt-footer">
+                <button class="btn-outline" id="btnPrintReceipt">🖨️ Imprimir Comprovante</button>
+                <button class="btn-primary" id="btnNewPix">💸 Fazer Outro Pix</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts (Funciona tanto com arquivo local quanto via CDN) -->
+    <script src="static/js/qrcode.min.js"></script>
+    <script>
+        if (typeof QRCode === "undefined") {
+            const cdn = document.createElement("script");
+            cdn.src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
+            document.head.appendChild(cdn);
+        }
+    </script>
+
+    <script>
+        // ==========================================
+        // MOTOR DE JAVASCRIPT DO PIX REVERSO (SITE)
+        // 100% Client-Side: Não depende de servidor!
+        // ==========================================
+
+        const TONE_MESSAGES = {
+            sarcastic: [
+                "Parabéns, Warren Buffett do Serasa! Você pagou R$ {amount} só para ver esta notificação. O mercado financeiro chora lágrimas de desespero.",
+                "Transação aprovada com sucesso! R$ {amount} saíram voando da sua conta. Se você não tivesse feito isso, você ainda teria R$ {amount}. Gênio!",
+                "Inovação bancária: seu saldo caiu R$ {amount}, e em troca você recebeu 4 linhas de texto puro arrependimento.",
+                "Seu dinheiro foi embora e não volta mais. Mas olha pelo lado bom: pelo menos você tem este lembrete de que você é péssimo em finanças."
+            ],
+            philosophical: [
+                "O dinheiro é uma ficção social compartilhada. Mas a ausência desses R$ {amount} no seu saldo agora é um fato cosmológico imutável.",
+                "Heráclito dizia que ninguém pisa duas vezes no mesmo rio. E você nunca mais verá esses R$ {amount}.",
+                "O que restou dos seus R$ {amount}? Apenas a certeza de que a frugalidade era o caminho... que você escolheu não seguir.",
+                "O vazio existencial e a sua conta bancária acabaram de entrar em perfeita ressonância graças a este Pix de R$ {amount}."
+            ],
+            coach: [
+                "ACORDA, VENCEDOR! Você acabou de queimar R$ {amount}! Enquanto você paga Pix Reverso, seu concorrente acordou às 4:45 pra vender água mineral no sinal!",
+                "Mente milionária? Mais pra mente devedora! R$ {amount} jogados no lixo! Salve esse comprovante como troféu da autossabotagem!",
+                "Dica do Primo Pobre: Se você guardasse esses R$ {amount} todo dia por 350 anos com juros de 12% a.a., você comprava uma lancha. Mas preferiu clicar no botão.",
+                "Você não comprou um produto, você comprou uma lição de moral de R$ {amount}. Espero que tenha aprendido (provavelmente não)."
+            ],
+            guilt: [
+                "Sua mãe sabe que você gastou R$ {amount} nisso? Pensa no suor, no cansaço, na marmita requentada... pra você pagar por uma notificação.",
+                "Ouviu esse som? Foi o seu futuro financeiro chorando no cantinho por causa desses R$ {amount} que nunca mais voltarão.",
+                "Com R$ {amount} você podia ter pago meia conta de luz, mas preferiu me remunerar pra te avisar que você não deveria ter feito isso.",
+                "Seu eu do futuro acabou de te olhar com um profundo olhar de desapontamento. R$ {amount} a menos na sua aposentadoria."
+            ]
+        };
+
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playPaymentChime() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                const osc1 = ctx.createOscillator();
+                const gain1 = ctx.createGain();
+                osc1.type = "sine";
+                osc1.frequency.setValueAtTime(587.33, now);
+                osc1.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+                gain1.gain.setValueAtTime(0.3, now);
+                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+                osc1.connect(gain1);
+                gain1.connect(ctx.destination);
+                osc1.start(now);
+                osc1.stop(now + 0.5);
+            } catch (e) { }
+        }
+
+        function playSadRegretChime() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "triangle";
+                osc.frequency.setValueAtTime(329.63, now);
+                osc.frequency.linearRampToValueAtTime(261.63, now + 0.3);
+                osc.frequency.linearRampToValueAtTime(196.00, now + 0.6);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.8);
+            } catch (e) { }
+        }
+
+        function formatBRL(value) {
+            return new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }).format(value);
+        }
+
+        function getStorageDB() {
+            try {
+                const data = localStorage.getItem("pix_reverso_db");
+                if (data) return JSON.parse(data);
+            } catch(e) {}
+            return {
+                transactions: [],
+                stats: { total_spent: 0, total_could_have_saved: 0, count: 0 }
+            };
+        }
+
+        function saveStorageDB(db) {
+            try {
+                localStorage.setItem("pix_reverso_db", JSON.stringify(db));
+            } catch(e) {}
+        }
+
+        function showToast(title, message, icon = "💸", duration = 6000) {
+            const container = document.getElementById("toastContainer");
+            const toast = document.createElement("div");
+            toast.className = "toast";
+            toast.innerHTML = `
+                <div class="toast-icon">${icon}</div>
+                <div class="toast-content">
+                    <h4>${title}</h4>
+                    <p>${message}</p>
+                </div>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateX(100%)";
+                toast.style.transition = "all 0.3s ease";
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
+        function sendBrowserPushNotification(title, message) {
+            if ("Notification" in window && Notification.permission === "granted") {
+                try {
+                    new Notification(title, {
+                        body: message,
+                        icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💸</text></svg>"
+                    });
+                } catch(e) {}
+            }
+        }
+
+        function generatePixPayload(amount) {
+            const valStr = amount.toFixed(2);
+            return `00020126580014br.gov.bcb.pix0136pix-reverso@bancodoarrependimento.org52040000530398654${String(valStr.length).padStart(2, '0')}${valStr}5802BR5925BANCO DO ARREPENDIMENTO6009SAO PAULO62070503***6304E8A2`;
+        }
+
+        function analyzeRemorse(amount, reason, tone) {
+            const coxinhas = Math.max(1, Math.floor(amount / 7.0));
+            const cafezinhos = Math.max(1, Math.floor(amount / 4.5));
+            const pasteis = (amount / 16.0).toFixed(1);
+            const horasClt = (amount / 6.90).toFixed(1);
+            const minutosClt = Math.round(horasClt * 60);
+            const celtaPct = ((amount / 14000.0) * 100).toFixed(4);
+            const cdiFuture = amount * Math.pow(1 + 0.10, 30);
+
+            const pool = TONE_MESSAGES[tone] || TONE_MESSAGES.sarcastic;
+            const chosen = pool[Math.floor(Math.random() * pool.length)];
+            const notificationText = chosen.replaceAll("{amount}", amount.toFixed(2));
+            const formattedAmount = formatBRL(amount);
+
+            return {
+                amount,
+                amount_formatted: formattedAmount,
+                reason,
+                tone,
+                id: "PXR-" + Math.random().toString(36).substring(2, 10).toUpperCase(),
+                date: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR'),
+                notification_text: notificationText,
+                institution: "Banco Central do Desperdício S.A. (Código 999)",
+                payer: "Você (Mão Furada)",
+                equivalences: [
+                    { icon: "🍗", label: "Coxinhas de padaria", value: `~${coxinhas} unidades` },
+                    { icon: "☕", label: "Cafezinhos expressos", value: `~${cafezinhos} xícaras` },
+                    { icon: "🥤", label: "Combos Pastel + Caldo", value: `~${pasteis} combos` },
+                    { icon: "⏰", label: "Tempo de CLT trabalhado", value: `${horasClt}h (${minutosClt} min)` },
+                    { icon: "🚗", label: "Fatia de um Celta 2004", value: `${celtaPct}%` },
+                    { icon: "📈", label: "No CDI em 30 anos (10% a.a.)", value: formatBRL(cdiFuture) }
+                ]
+            };
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const amountInput = document.getElementById("amountInput");
+            const reasonInput = document.getElementById("reasonInput");
+            const toneSelect = document.getElementById("toneSelect");
+            const delaySelect = document.getElementById("delaySelect");
+            const amountPills = document.querySelectorAll(".pill");
+            const pixForm = document.getElementById("pixForm");
+
+            const headerLostBalance = document.getElementById("headerLostBalance");
+            const statTotalSpent = document.getElementById("statTotalSpent");
+            const statCouldSave = document.getElementById("statCouldSave");
+            const statCoxinhas = document.getElementById("statCoxinhas");
+            const statHoursWorked = document.getElementById("statHoursWorked");
+            const historyList = document.getElementById("historyList");
+            const btnClearHistory = document.getElementById("btnClearHistory");
+
+            const btnSoundToggle = document.getElementById("btnSoundToggle");
+            const soundIcon = document.getElementById("soundIcon");
+            const btnBrowserNotify = document.getElementById("btnBrowserNotify");
+
+            const qrModal = document.getElementById("qrModal");
+            const btnGenerateQr = document.getElementById("btnGenerateQr");
+            const btnCloseQr = document.getElementById("btnCloseQr");
+            const qrContainer = document.getElementById("qrContainer");
+            const modalQrAmount = document.getElementById("modalQrAmount");
+            const pixCodeInput = document.getElementById("pixCodeInput");
+            const btnCopyPix = document.getElementById("btnCopyPix");
+            const btnConfirmQrPay = document.getElementById("btnConfirmQrPay");
+
+            const receiptModal = document.getElementById("receiptModal");
+            const btnCloseReceipt = document.getElementById("btnCloseReceipt");
+            const receiptContent = document.getElementById("receiptContent");
+            const btnPrintReceipt = document.getElementById("btnPrintReceipt");
+            const btnNewPix = document.getElementById("btnNewPix");
+
+            // Permissão de notificação
+            function updateNotifyBtn() {
+                if (!("Notification" in window)) {
+                    btnBrowserNotify.style.display = "none";
+                    return;
+                }
+                if (Notification.permission === "granted") {
+                    btnBrowserNotify.textContent = "🔔 Notificações Ativas";
+                    btnBrowserNotify.style.borderColor = "var(--accent-green)";
+                    btnBrowserNotify.style.color = "var(--accent-green)";
+                } else if (Notification.permission === "denied") {
+                    btnBrowserNotify.textContent = "🔕 Notificações Bloqueadas";
+                } else {
+                    btnBrowserNotify.textContent = "🔔 Ativar Notificações";
+                }
+            }
+            updateNotifyBtn();
+
+            btnBrowserNotify.addEventListener("click", () => {
+                if ("Notification" in window) {
+                    Notification.requestPermission().then(permission => {
+                        updateNotifyBtn();
+                        if (permission === "granted") {
+                            sendBrowserPushNotification("💸 Pix Reverso", "Notificações do navegador ativadas com sucesso!");
+                            showToast("Notificações Ativas", "Agora você receberá alertas direto na sua tela!");
+                        }
+                    });
+                }
+            });
+
+            btnSoundToggle.addEventListener("click", () => {
+                soundEnabled = !soundEnabled;
+                soundIcon.textContent = soundEnabled ? "🔊" : "🔇";
+                showToast("Configuração", soundEnabled ? "Som ativado!" : "Som silenciado.");
+            });
+
+            amountPills.forEach(pill => {
+                pill.addEventListener("click", () => {
+                    amountPills.forEach(p => p.classList.remove("active"));
+                    pill.classList.add("active");
+                    amountInput.value = parseFloat(pill.dataset.amount).toFixed(2);
+                });
+            });
+
+            amountInput.addEventListener("input", () => {
+                const val = parseFloat(amountInput.value);
+                amountPills.forEach(p => {
+                    if (parseFloat(p.dataset.amount) === val) p.classList.add("active");
+                    else p.classList.remove("active");
+                });
+            });
+
+            function renderReceipt(receipt) {
+                receiptContent.innerHTML = `
+                    <div class="receipt-amount-box">
+                        <div class="receipt-amount-title">Valor Oficialmente Perdido</div>
+                        <div class="receipt-amount-val">${receipt.amount_formatted}</div>
+                        <div class="receipt-amount-sub">💡 Se você NÃO tivesse feito esse Pix, ainda teria esse dinheiro!</div>
+                    </div>
+
+                    <div class="receipt-alert-box">
+                        <div class="receipt-alert-title">📢 Notificação Recebida:</div>
+                        <div class="receipt-alert-text">"${receipt.notification_text}"</div>
+                    </div>
+
+                    <div class="receipt-section-title">Dados da Transação</div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">ID do Pix Reverso:</span>
+                        <span class="receipt-val">${receipt.id}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Data e Hora:</span>
+                        <span class="receipt-val">${receipt.date}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Motivo do Gasto:</span>
+                        <span class="receipt-val">${receipt.reason}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Instituição:</span>
+                        <span class="receipt-val">${receipt.institution}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Benefício Obtido:</span>
+                        <span class="receipt-val" style="color: #f87171;">Absolutamente Nenhum</span>
+                    </div>
+
+                    <div class="receipt-section-title">O que você poderia ter feito:</div>
+                    <div class="receipt-equivalences">
+                        ${receipt.equivalences.map(eq => `
+                            <div class="eq-pill">
+                                <span class="eq-icon">${eq.icon}</span>
+                                <div class="eq-info">
+                                    <span class="eq-label">${eq.label}</span>
+                                    <span class="eq-val">${eq.value}</span>
+                                </div>
+                            </div>
+                        `).join("")}
+                    </div>
+                `;
+                receiptModal.classList.add("active");
+            }
+
+            function updateUI() {
+                const db = getStorageDB();
+                const total = db.stats.total_spent || 0;
+                const formatted = formatBRL(total);
+
+                headerLostBalance.textContent = formatted;
+                statTotalSpent.textContent = formatted;
+                statCouldSave.textContent = formatted;
+
+                statCoxinhas.textContent = Math.floor(total / 7.0);
+                statHoursWorked.textContent = (total / 6.90).toFixed(1) + "h";
+
+                if (!db.transactions.length) {
+                    historyList.innerHTML = `
+                        <div class="empty-state">
+                            <span class="empty-icon">📭</span>
+                            <p>Nenhum Pix Reverso realizado ainda.</p>
+                            <small>Seu bolso agradece. Mas até quando?</small>
+                        </div>
+                    `;
+                    return;
+                }
+
+                historyList.innerHTML = db.transactions.map(item => `
+                    <div class="history-item" data-id="${item.id}">
+                        <div class="history-meta">
+                            <span class="history-reason">${item.reason}</span>
+                            <div class="history-details">
+                                <span>🕒 ${item.date}</span>
+                                <span class="history-pill">${item.tone.toUpperCase()}</span>
+                            </div>
+                        </div>
+                        <div class="history-financials">
+                            <span class="history-amount">-${item.amount_formatted}</span>
+                            <span class="history-could-have">Teria: +${item.amount_formatted}</span>
+                        </div>
+                    </div>
+                `).join("");
+
+                document.querySelectorAll(".history-item").forEach(el => {
+                    el.addEventListener("click", () => {
+                        const id = el.dataset.id;
+                        const found = db.transactions.find(t => t.id === id);
+                        if (found) renderReceipt(found);
+                    });
+                });
+            }
+
+            function executePayment(amount, reason, tone, delay) {
+                playPaymentChime();
+                const receipt = analyzeRemorse(amount, reason, tone);
+
+                const db = getStorageDB();
+                db.transactions.unshift(receipt);
+                db.transactions = db.transactions.slice(0, 50);
+                db.stats.total_spent = Number((db.stats.total_spent + amount).toFixed(2));
+                db.stats.total_could_have_saved = db.stats.total_spent;
+                db.stats.count = (db.stats.count || 0) + 1;
+                saveStorageDB(db);
+
+                updateUI();
+
+                if (delay > 0) {
+                    showToast(
+                        "⏳ Pix Reverso Processado",
+                        `Você pagou ${receipt.amount_formatted}. A notificação de remorso chegará em ${delay} segundos!`,
+                        "⏳",
+                        4000
+                    );
+                    setTimeout(() => {
+                        playSadRegretChime();
+                        sendBrowserPushNotification(`💸 Pix Reverso: ${receipt.amount_formatted} Perdidos!`, receipt.notification_text);
+                        showToast("💸 O Arrependimento Chegou!", receipt.notification_text, "📉", 8000);
+                    }, delay * 1000);
+                } else {
+                    playSadRegretChime();
+                    sendBrowserPushNotification(`💸 Pix Reverso: ${receipt.amount_formatted} Perdidos!`, receipt.notification_text);
+                    showToast("💸 Pix Reverso Confirmado!", receipt.notification_text, "📉", 8000);
+                }
+
+                renderReceipt(receipt);
+            }
+
+            pixForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const amount = parseFloat(amountInput.value);
+                const reason = reasonInput.value.trim() || "Desperdício voluntário";
+                const tone = toneSelect.value;
+                const delay = parseInt(delaySelect.value, 10);
+
+                if (isNaN(amount) || amount <= 0) {
+                    alert("Por favor, digite um valor maior que R$ 0,00.");
+                    return;
+                }
+
+                executePayment(amount, reason, tone, delay);
+            });
+
+            // QR Code Modal
+            btnGenerateQr.addEventListener("click", () => {
+                const amount = parseFloat(amountInput.value) || 25.0;
+                modalQrAmount.textContent = formatBRL(amount);
+                const pixCode = generatePixPayload(amount);
+                pixCodeInput.value = pixCode;
+
+                qrContainer.innerHTML = "";
+                if (typeof QRCode !== "undefined") {
+                    new QRCode(qrContainer, {
+                        text: pixCode,
+                        width: 200,
+                        height: 200,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff"
+                    });
+                } else {
+                    qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixCode)}" alt="QR Code">`;
+                }
+
+                qrModal.classList.add("active");
+            });
+
+            btnCloseQr.addEventListener("click", () => qrModal.classList.remove("active"));
+            
+            btnCopyPix.addEventListener("click", () => {
+                pixCodeInput.select();
+                navigator.clipboard.writeText(pixCodeInput.value).then(() => {
+                    btnCopyPix.textContent = "✅ Copiado!";
+                    setTimeout(() => btnCopyPix.textContent = "📋 Copiar", 2000);
+                });
+            });
+
+            btnConfirmQrPay.addEventListener("click", () => {
+                qrModal.classList.remove("active");
+                const amount = parseFloat(amountInput.value) || 25.0;
+                const reason = reasonInput.value.trim() || "Paguei via QR Code";
+                const tone = toneSelect.value;
+                const delay = parseInt(delaySelect.value, 10);
+                executePayment(amount, reason, tone, delay);
+            });
+
+            btnCloseReceipt.addEventListener("click", () => receiptModal.classList.remove("active"));
+            btnNewPix.addEventListener("click", () => {
+                receiptModal.classList.remove("active");
+                amountInput.focus();
+            });
+            btnPrintReceipt.addEventListener("click", () => window.print());
+
+            btnClearHistory.addEventListener("click", () => {
+                if (confirm("Deseja apagar o histórico? Seu dinheiro continuará perdido, mas sua consciência ficará mais limpa.")) {
+                    localStorage.removeItem("pix_reverso_db");
+                    updateUI();
+                    showToast("Histórico Limpo", "Memória apagada com sucesso!", "🧹");
+                }
+            });
+
+            [qrModal, receiptModal].forEach(m => {
+                m.addEventListener("click", (e) => {
+                    if (e.target === m) m.classList.remove("active");
+                });
+            });
+
+            updateUI();
+        });
+    </script>
+</body>
+</html>
